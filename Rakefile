@@ -9,10 +9,17 @@ ssh_port       = "22"
 document_root  = "~/website.com/"
 rsync_delete   = false
 rsync_args     = ""  # Any extra arguments to pass to rsync
+<<<<<<< HEAD
 deploy_default = "push"
 
 # This will be configured for you when you run config_deploy
 deploy_branch  = "master"
+=======
+deploy_default = "rsync"
+
+# This will be configured for you when you run config_deploy
+deploy_branch  = "gh-pages"
+>>>>>>> 4fdae37e4294618084f652c99c0c06ba7663ac07
 
 ## -- Misc Configs -- ##
 
