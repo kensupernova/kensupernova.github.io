@@ -1,13 +1,12 @@
 # Site settings
 title: Guanghui Zhang
-email: your-email@domain.com
-description: "Know all about me from here."
-baseurl: "/my-jekyll-blog"
-url: "http://yourdomain.com"
-twitter_username: kensupernova
-github_username:  kensupernova
 email: ghzhang66 at gmail dot com
 email1: zgh_ken at 126 dot com
+description: "Know all about me from here."
+baseurl: "/my-jekyll-blog"
+url: "http://guanghuiz.com"
+twitter_username: kensupernova
+github_username:  kensupernova
 # Build settings
 markdown: kramdown
 permalink: pretty
