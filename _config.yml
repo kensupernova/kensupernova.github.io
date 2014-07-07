@@ -1,0 +1,41 @@
+# Site settings
+title: Guanghui Zhang
+email: your-email@domain.com
+description: "Know all about me from here."
+baseurl: "/my-jekyll-blog"
+url: "http://yourdomain.com"
+twitter_username: kensupernova
+github_username:  kensupernova
+email: ghzhang66 at gmail dot com
+email1: zgh_ken at 126 dot com
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# time zone
+timezone: Asia/Singapore
+encoding: utf-8
+
+#nav config
+# nav:
+#   - text:home
+#     url:/
+#   - text:categorie
+#     url:/categories/
+#   - text:archive
+#     url:/archives/
+#   - text: link
+#     url: /links/
+#   - text:contact
+#     url:/contact/
+#   - text:about
+#     url: /about/
+
+# comment config
+# disqus:
+#   config: false
+#   id:guanghuiz
+
+# duoshao:
+#   config:true
+#   id:kensupernova
