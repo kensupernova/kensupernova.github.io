@@ -1,7 +1,6 @@
 # Site settings
 title: Guanghui Zhang
-email: ghzhang66 at gmail dot com
-email1: zgh_ken at 126 dot com
+email: ghzhang66 at gmail
 description: "Know all about me from here."
 baseurl: ""
 url: "http://www.guanghuiz.com"
@@ -31,10 +30,10 @@ encoding: utf-8
 #     url: /about/
 
 # comment config
-# disqus:
-#   config: false
-#   id:guanghuiz
+disqus:
+  config: false
+  id: guanghuiz
 
-# duoshao:
-#   config:true
-#   id:kensupernova
+duoshuo:
+  config: true
+  id: kensupernova
