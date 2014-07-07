@@ -3,10 +3,10 @@
   <channel>
     <title>Guanghui Zhang</title>
     <description>Know all about me from here.</description>
-    <link>http://yourdomain.com/my-jekyll-blog/</link>
-    <atom:link href="http://yourdomain.com/my-jekyll-blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 07 Jul 2014 19:56:00 +0800</pubDate>
-    <lastBuildDate>Mon, 07 Jul 2014 19:56:00 +0800</lastBuildDate>
+    <link>http://guanghuiz.com/my-jekyll-blog/</link>
+    <atom:link href="http://guanghuiz.com/my-jekyll-blog/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 07 Jul 2014 20:05:07 +0800</pubDate>
+    <lastBuildDate>Mon, 07 Jul 2014 20:05:07 +0800</lastBuildDate>
     <generator>Jekyll v2.1.0</generator>
     
       <item>
@@ -14,8 +14,8 @@
         <description>&lt;p&gt;Jekyll is really so cool&lt;/p&gt;
 </description>
         <pubDate>Sun, 06 Jul 2014 22:58:25 +0800</pubDate>
-        <link>http://yourdomain.com/my-jekyll-blog/jekyll/update/2014/07/06/jekyll-is-cool/</link>
-        <guid isPermaLink="true">http://yourdomain.com/my-jekyll-blog/jekyll/update/2014/07/06/jekyll-is-cool/</guid>
+        <link>http://guanghuiz.com/my-jekyll-blog/jekyll/update/2014/07/06/jekyll-is-cool/</link>
+        <guid isPermaLink="true">http://guanghuiz.com/my-jekyll-blog/jekyll/update/2014/07/06/jekyll-is-cool/</guid>
         
         
         <category>jekyll</category>
@@ -31,8 +31,8 @@ People say blogging is more important than the
 blog system you choose.&lt;/p&gt;
 </description>
         <pubDate>Sun, 06 Jul 2014 22:58:25 +0800</pubDate>
-        <link>http://yourdomain.com/my-jekyll-blog/jekyll/2014/07/06/i-am-the-first-blog/</link>
-        <guid isPermaLink="true">http://yourdomain.com/my-jekyll-blog/jekyll/2014/07/06/i-am-the-first-blog/</guid>
+        <link>http://guanghuiz.com/my-jekyll-blog/jekyll/2014/07/06/i-am-the-first-blog/</link>
+        <guid isPermaLink="true">http://guanghuiz.com/my-jekyll-blog/jekyll/2014/07/06/i-am-the-first-blog/</guid>
         
         <category>jekyll</category>
         
@@ -59,8 +59,8 @@ To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; direc
 
 </description>
         <pubDate>Sat, 05 Jul 2014 22:58:25 +0800</pubDate>
-        <link>http://yourdomain.com/my-jekyll-blog/jekyll/update/2014/07/05/welcome-to-jekyll/</link>
-        <guid isPermaLink="true">http://yourdomain.com/my-jekyll-blog/jekyll/update/2014/07/05/welcome-to-jekyll/</guid>
+        <link>http://guanghuiz.com/my-jekyll-blog/jekyll/update/2014/07/05/welcome-to-jekyll/</link>
+        <guid isPermaLink="true">http://guanghuiz.com/my-jekyll-blog/jekyll/update/2014/07/05/welcome-to-jekyll/</guid>
         
         
         <category>jekyll</category>
