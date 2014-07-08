@@ -3,7 +3,7 @@ title: Guanghui Zhang
 email: ghzhang66 at gmail
 description: "Know all about me from here."
 baseurl: ""
-url: "http://www.guanghuiz.com"
+# url: "http://www.guanghuiz.com"
 twitter_username: kensupernova
 github_username:  kensupernova
 # Build settings
@@ -15,19 +15,19 @@ timezone: Asia/Singapore
 encoding: utf-8
 
 #nav config
-# nav:
-#   - text:home
-#     url:/
-#   - text:categorie
-#     url:/categories/
-#   - text:archive
-#     url:/archives/
-#   - text: link
-#     url: /links/
-#   - text:contact
-#     url:/contact/
-#   - text:about
-#     url: /about/
+nav:
+  - text: Home
+    url: /
+  - text: Category
+    url: /categories/
+  - text: Archive
+    url: /archives/
+  - text: Link
+    url: /links/
+  - text: Contact
+    url: /contact/
+  # - text: About
+  #   url: /about/
 
 # comment config
 disqus:
