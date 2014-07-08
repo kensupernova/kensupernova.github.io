@@ -19,11 +19,11 @@ nav:
   - text: Home
     url: /
   - text: Category
-    url: /categories/
+    url: /category/
   - text: Archive
-    url: /archives/
+    url: /archive/
   - text: Link
-    url: /links/
+    url: /link/
   - text: Contact
     url: /contact/
   # - text: About
