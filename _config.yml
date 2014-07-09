@@ -31,7 +31,7 @@ nav:
 
 # comment config
 disqus:
-  config: false
+  config: true
   id: guanghuiz
 
 duoshuo:
