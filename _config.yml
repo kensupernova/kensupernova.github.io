@@ -24,8 +24,8 @@ nav:
     url: /archive/
   - text: Link
     url: /link/
-  - text: Contact
-    url: /contact/
+  # - text: Contact
+  #   url: /contact/
   - text: About
     url: /about/
 
