@@ -53,7 +53,7 @@ a:visited { color: #205caa; }
   display: block;
   color: #333;
   font-size: 26px;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
   float: left;
   line-height: 56px;
   position: relative;
@@ -71,7 +71,7 @@ a:visited { color: #205caa; }
 .site-nav .page-link {
   margin-left: 20px;
   color: #727272;
-  letter-spacing: -.5px;
+  letter-spacing: 0px;
 }
 
 .nav-item {
@@ -91,7 +91,7 @@ a:visited { color: #205caa; }
 .footer-heading {
   font-size: 18px;
   font-weight: 300;
-  letter-spacing: -.5px;
+  letter-spacing: 0px;
   margin-bottom: 15px;
 }
 
@@ -126,7 +126,7 @@ a:visited { color: #205caa; }
 .site-footer li,
 .site-footer p {
   font-size: 15px;
-  letter-spacing: -.3px;
+  letter-spacing: 0px;
   color: #828282;
 }
 
@@ -161,8 +161,8 @@ a:visited { color: #205caa; }
 .posts li { margin-bottom: 30px; }
 
 .posts .post-link {
-  font-size: 24px;
-  letter-spacing: -1px;
+  font-size: 20px;
+  letter-spacing: 0px;
   line-height: 1;
 }
 
@@ -172,6 +172,23 @@ a:visited { color: #205caa; }
   color: #818181;
 }
 
+.category{
+  display: block;
+  font-size: 20px;
+  letter-spacing: 0px;
+  margin-bottom: 50px;
+}
+
+.category-post-date {
+  font-size: 15px;
+}
+
+.category-post-link{
+  font-size: 18px;
+  letter-spacing: 0px;
+  margin-left: 20px;
+}
+
 
 /* Post styles */
 /* ----------------------------------------------------------*/
@@ -179,7 +196,7 @@ a:visited { color: #205caa; }
 .post-header { margin: 10px 0 30px; }
 
 .post-header h1 {
-  font-size: 24px;
+  font-size: 20px;
   letter-spacing: 0px;
   line-height: 1;
   font-weight: 300;
@@ -209,17 +226,17 @@ a:visited { color: #205caa; }
 
 .post-content h2 {
   font-size: 32px;
-  letter-spacing: -1.25px;
+  letter-spacing: 0px;
 }
 
 .post-content h3 {
   font-size: 26px;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
 }
 
 .post-content h4 {
   font-size: 20px;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
 }
 
 .post-content blockquote {
@@ -227,7 +244,7 @@ a:visited { color: #205caa; }
   padding-left: 20px;
   font-size: 18px;
   opacity: .6;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
   font-style: italic;
   margin: 30px 0;
 }

@@ -3,4 +3,21 @@ layout: page
 title: Category
 permalink: /category/
 ---
-Categories Page
+<div class="home">
+<div class="categories">
+    {% for category in site.categories %}
+      <ul class = "category" style="list-style-type: square;"><a  name="category | first">{{category | first}}</a>
+        <ul style="list-style-type: none;">
+          {% for posts in category %}
+            {% for post in posts%}
+              <li>
+                <span class="category-post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+                <a class="category-post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+              </li>
+            {% endfor%}
+          {% endfor%}
+        </ul>
+    </ul>  
+    {% endfor %}
+</div>
+</div>

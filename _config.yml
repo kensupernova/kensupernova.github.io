@@ -26,8 +26,8 @@ nav:
     url: /link/
   - text: Contact
     url: /contact/
-  # - text: About
-  #   url: /about/
+  - text: About
+    url: /about/
 
 # comment config
 disqus:
@@ -35,5 +35,5 @@ disqus:
   id: guanghuiz
 
 duoshuo:
-  config: true
+  config: false
   id: kensupernova
