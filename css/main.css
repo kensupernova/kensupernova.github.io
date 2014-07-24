@@ -177,8 +177,12 @@ a:visited { color: #205caa; }
   font-size: 20px;
   letter-spacing: 0px;
   margin-bottom: 50px;
+  
 }
 
+.category.a{
+  list-style-type: square;
+}
 .category-post-date {
   font-size: 15px;
 }

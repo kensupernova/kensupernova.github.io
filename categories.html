@@ -6,7 +6,7 @@ permalink: /category/
 <div class="home">
 <div class="categories">
     {% for category in site.categories %}
-      <ul class = "category" style="list-style-type: square;"><a  name="category | first">{{category | first}}</a>
+      <ul class = "category"><a  name="category | first">{{category | first}}</a>
         <ul style="list-style-type: none;">
           {% for posts in category %}
             {% for post in posts%}
