@@ -22,8 +22,6 @@ nav:
     url: /category/
   - text: Archive
     url: /archive/
-  - text: Link
-    url: /link/
   # - text: Contact
   #   url: /contact/
   - text: About
