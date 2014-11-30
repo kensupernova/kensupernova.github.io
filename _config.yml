@@ -22,10 +22,10 @@ nav:
     url: /category/
   - text: Archive
     url: /archive/
-  # - text: Contact
-  #   url: /contact/
   - text: About
     url: /about/
+  - text: App
+    url: /cn/apps/
 
 # comment config
 disqus:
