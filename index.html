@@ -1,25 +1,6 @@
 ---
-layout: default
+layout: home
+avatar: yes
 ---
-
-<div class="home">
-
-  <h1 class="page-header">Home</h1>
-
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        <article class="post-content">
-          {% if post.content contains "<!--more-->" %}
-            {{ post.content | split:'<!--more-->' | first }} <a href="{{post.url| prepend: site.baseurl }}"> Continue...</a>
-          {% else %}
-            {{ post.content }}
-          {% endif %}
-        </article>
-      </li>
-    {% endfor %}
-  </ul>
-
-</div>
+This is the entrance to my personal website in Chinese and English Version. 
+I had learned this from <a href="http://yihui.name">Yihui Xie</a>. As bilingual speaker, it is the best to establish website in two languages so that I can reach to more audiences. Currently I work as reseach assocate in Nanyang Technological University. Since I am so obssessed with coding, I learned to write programs by myself. I have taken more than ten MOOC courses on CS from Coursera, Edx and Udacity. They covered python programing, web appliation development, android app development, and data analysis skills. 

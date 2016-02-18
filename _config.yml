@@ -4,7 +4,6 @@ email: ""
 description: "Know all about me from here."
 baseurl: ""
 # url: "http://www.guanghuiz.com"
-twitter_username: ken__supernova
 github_username:  kensupernova
 # Build settings
 markdown: kramdown
@@ -13,25 +12,3 @@ permalink: pretty
 # time zone
 timezone: Asia/Singapore
 encoding: utf-8
-
-#nav config
-nav:
-  - text: Home
-    url: /
-  - text: Category
-    url: /category/
-  - text: Archive
-    url: /archive/
-  - text: About
-    url: /about/
-  - text: App
-    url: /cn/apps/
-
-# comment config
-disqus:
-  config: true
-  id: guanghuiz
-
-duoshuo:
-  config: false
-  id: kensupernova
