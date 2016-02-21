@@ -3,7 +3,7 @@ title: GUANGHUIZ
 email: ""
 description: "Know all about me from here."
 baseurl: ""
-# url: "http://www.guanghuiz.com"
+url: "http://www.guanghuiz.com"
 github_username:  kensupernova
 # Build settings
 markdown: kramdown
