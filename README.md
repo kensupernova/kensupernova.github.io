@@ -1,3 +1,3 @@
 我的博客
 ==============
-我的博客. visit by www.guanghuiz.com/cn
+我的博客. visit by www.guanghuiz.com

@@ -1,8 +1,8 @@
 # Site settings
 title:  张光辉
 description:  "一个匠人。"
-baseurl: "/cn"
-url: "http://www.guanghuiz.com/cn"
+baseurl: ""
+url: "http://www.guanghuiz.com"
 github_username:  kensupernova
 
 # Build settings
