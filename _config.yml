@@ -21,15 +21,17 @@ nav:
     url:  /categories/
   - text: 归档
     url:  /archives/
-  - text: 关于
-    url:  /about/
   - text: Apps
     url: /apps/  
+  - text: 关于
+    url:  /about/
 apps:
   - text: oneverse
     url: /apps/oneverse/
   - text: idiomcracker
-    url: /apps/idiomcracker/  
+    url: /apps/idiomcracker/ 
+  - text: exchcard
+    url: /apps/exchangecard/ 
 
 # comment config
 disqus:
