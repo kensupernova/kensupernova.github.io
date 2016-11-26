@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    h2 {   
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .axis text {
+      font-family: sans-serif;
+      font-size: 25px;
+    }
+
+    p{
+      margin-left: 250px;
+      margin-bottom: 50px;
+      font-size: 15px;
+      font-family: sans-serif;
+      width: 800px;
+    }
+
+    p.descript{
+      margin-bottom: 50px;
+      width: 800px;
+    }
+
+    svg {
+      margin-left: 200px;
+    }
+
+    div.group_axiss{
+      position: fixed;
+      top: 150px;
+      left: 5px;
+      font-size: 15px;
+      font-family: sans-serif;
+    }
+
+    div.group_axiss div{
+      width: 150px;  
+      height: 50px;
+      background: rgb(251, 201, 127);
+      padding: 3px;
+      margin: 7px;
+      text-align: center;
+    }
+
+    div.handedness{
+      position: fixed;
+      top: 550px;
+      left: 5px;
+      width: 150px;  
+      height: 50px;
+      background: rgb(251, 201, 127);
+      padding: 3px;
+      margin: 7px;
+      font-size: 12px;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    
+  
+  </style>
+  <script src="js/d3.min.js"></script>
+  <script type="text/javascript">
+    function draw(baseball_data){
+      var margin = 50,
+          width = 800,
+          height = 600,
+          padding = 80;
+
+      var current_x = "weight";
+      var current_y = "HR";
+      var current_minx = 0;
+      var current_maxx = 0;
+
+      var current_maxy = 0;
+      var current_maxy = 0;
+
+      var current_hand = 2;
+        // 0: R, 1: L, 2:RL
+
+      d3.select("body")
+        .append("h2")
+        .text("The performance of baseball players");
+
+      var svg = d3.select("body")
+        .append("svg")  
+        .attr("width", width+margin)
+        .attr("height", height+margin)
+        .append("g")
+        .attr("class", "baseball_graph");
+        
+      // add Y axis label .....
+      svg.append("text")
+        .attr("class", "ylabel")
+        .attr("text-anchor", "end")
+        .attr("x", -height/2)
+        .attr("y", 2)
+        .attr("dy","0.75em")
+        .attr("transform", "rotate(-90)")
+        .attr("font-size", "15")
+        .attr("margin-left", '20')
+        .text("HR")
+      // add X axis label.....
+      svg.append("text")
+        .attr("class", "xlabel")
+        .attr("text-anchor", "end")
+        .attr("y", height-20)
+        .attr("x", width/2)
+        .attr("font-size", "25")
+        .text("weight")
+
+      // get the max values for axiss
+      var maxX = 1.1*d3.max(baseball_data, 
+        function(d){return parseFloat(d["weight"]); });
+
+      var minX = 0.9*d3.min(baseball_data, 
+        function(d){return parseFloat(d["weight"]); }); 
+        
+      var maxY = 1.2*d3.max(baseball_data, 
+            function(d){return parseFloat(d["HR"]); });
+      var minY = 0.9*d3.min(baseball_data, 
+            function(d){return parseFloat(d["HR"]); });
+     
+
+      var xScale = d3.scale.linear()
+          .domain([minX, maxX])
+          .range([padding, width-padding]);
+
+      var yScale = d3.scale.linear()
+          .domain([minY, maxY])
+          .range([height-padding, padding]);
+
+      var xAxis = d3.svg.axis()
+          .scale(xScale)
+          .orient("bottom")
+          .ticks(7);
+
+      var yAxis = d3.svg.axis()
+          .scale(yScale)
+          .orient("left")
+          .ticks(7);
+
+      //// add x axis
+      svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(0, "+(height-padding )+")")
+          .call(xAxis);
+
+      //// add y axis
+      svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate("+ padding +", 0)")
+          .call(yAxis);
+
+
+      function plot_points_hand(data){
+        // aggregate the information in each handedness
+        // var nested_hand = d3.nest()
+        //   .key(function(d){
+        //       return d['handedness'];
+        //   })
+        //   .entries(data);
+
+        // var ken_func = function(d){
+        //     return d['key'];
+
+        // };
+        
+        var getXAxisValue = function(d){
+
+          if (parseFloat(d[current_x]) == 0){
+            return xScale(0);
+          } else{
+            return xScale(d[current_x]);
+          }
+        };
+              
+        var getYAxisValue = function(d){
+                      
+          if ( parseFloat(d[current_y]) <= 0){
+            return yScale(0);
+          } else{
+            return yScale(parseFloat(d[current_y]));
+          }
+        };
+        
+        // plot the points (left handedness) with circle
+        svg.selectAll('circle')
+            .data(baseball_data)
+            .enter()
+            .append("circle")
+            .filter(function(d){            
+                return d["handedness"]=== "L"&& d[current_y] !=0;
+              })
+            .attr("cx", getXAxisValue)
+            .attr("cy", getYAxisValue)
+            .attr("r", 5)
+            .attr("fill", "blue")
+            .style("opacity", 1);
+        // plot the points with righthanded with ellipse
+        svg.selectAll('ellipse')
+            .data(baseball_data)
+            .enter()
+            .append("ellipse")
+            .filter(function(d){
+                return d["handedness"]=== "R"&& d[current_y] !=0;
+              })
+            .attr("cx", getXAxisValue)
+            .attr("cy", getYAxisValue)
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .attr("fill", "red")
+            .style("opacity", 1);
+        
+        function update_hand(handedness1, handedness2){
+
+          // UPDATE HAND,
+          // both hand, opacity == 1
+          // single hand, opacity <= 1
+          
+          var opa=0  
+          if(current_hand ==2){
+            opa = 1;
+          } else{
+            opa =0.2;
+          }
+
+          // remove the old points
+          var circles1 = svg.selectAll('circle')
+              .remove();
+          
+          var circles2 = svg.selectAll('ellipse')
+              .remove();
+
+          var maxX = 1.1*d3.max(baseball_data, 
+            function(d){return parseFloat(d[current_x]); });
+          var minX = 0.9*d3.min(baseball_data, 
+            function(d){return parseFloat(d[current_x]); }); 
+            
+          var maxY = 1.1*d3.max(baseball_data, 
+            function(d){return parseFloat(d[current_y]); });
+          var minY = 0.9*d3.min(baseball_data, 
+            function(d){return parseFloat(d[current_y]); });
+          
+          var xScale = d3.scale.linear()
+              .domain([minX, maxX])
+              .range([padding, width-padding]);
+
+          var yScale = d3.scale.linear()
+              .domain([minY, maxY])
+              .range([height-padding, padding]);
+
+          var getXAxisValue = function(d){
+
+            if (parseFloat(d[current_x]) == 0){
+              return xScale(0);
+            } else{
+              return xScale(parseFloat(d[current_x]));
+            }
+          };
+              
+          var getYAxisValue = function(d){
+                        
+            if ( parseFloat(d[current_y]) <= 0){
+              return yScale(0);
+            } else{
+              return yScale(parseFloat(d[current_y]));
+            }
+          };
+          
+          /// draw points
+          svg.selectAll('circle')
+            .data(baseball_data)
+            .enter()
+            .append("circle")
+            .filter(function(d){            
+                return d["handedness"]=== handedness1 && d[current_y] !=0;
+              })
+            .transition()
+            .duration(1000)
+            .attr("cx", getXAxisValue)
+            .attr("cy", getYAxisValue)
+            .attr("r", 5)
+            .attr("fill", function(d){
+                if(handedness1=="R"){
+                  return "red";
+                } else{
+                  return "blue";
+                }
+              })
+            .style("opacity", 1);
+          
+
+
+          svg.selectAll('ellipse')
+            .data(baseball_data)
+            .enter()
+            .append("ellipse")
+            .filter(function(d){
+                return d["handedness"]=== handedness2&& d[current_y] !=0;
+              })
+            .transition()
+            .duration(1000)
+            .attr("cx", getXAxisValue)
+            .attr("cy", getYAxisValue)
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .attr("fill", function(d){
+                if(handedness1=="R"){
+                  return "blue";
+                } else{
+                  return "red";
+                }
+              })
+            .style("opacity", opa);
+
+
+          // add regression only for handedness1
+          // remove all the zeros data points
+          var baseball_data_1 = baseball_data.filter(
+            function(d){
+                  return d["handedness"]=== handedness1 && d[current_y] !=0;
+                }
+          );
+
+          if (current_y!="avg"){
+            baseball_data_1 = baseball_data.filter(
+            function(d){
+                  return true;
+                }
+          );
+
+          }
+
+          var ySeries = baseball_data_1.map(function(d){
+            return parseFloat(d[current_y]);
+          });
+
+          var xSeries = baseball_data_1.map(function(d){
+            return parseFloat(d[current_x]);
+          });
+
+          if(current_y =="avg"){
+            ySeries = baseball_data_1.map(function(d){
+              return parseFloat(d[current_y]);
+            });
+          }
+
+          console.log('xSeries '+handedness1);
+          console.log(xSeries);
+          console.log('ySeries '+handedness1);
+          console.log(ySeries);
+
+          // regresssion analysis
+          //slope, intercept, r2
+          var leastSquaresCoeff = leastSquares(xSeries, ySeries);
+          console.log(leastSquaresCoeff);
+
+          // remove the old line
+          var oldline = svg.selectAll("line.regression");
+          oldline.transition()
+              .duration(100)
+              .remove();
+
+          svg.selectAll("text.legend")
+              .transition()
+              .duration(100)
+              .remove();
+
+          // slope, intercept and r-square of the line
+          console.log(xScale(current_minx));
+          console.log(yScale((leastSquaresCoeff[1]+leastSquaresCoeff[0]*current_minx)));
+
+          console.log(xScale(current_maxx));
+          console.log(yScale((leastSquaresCoeff[1]+leastSquaresCoeff[0]*current_maxx)))
+
+
+
+          var myLine = svg.append("svg:line")
+              .attr("class", "regression")
+              .attr("x1", xScale(current_minx))
+              .attr("y1", yScale((leastSquaresCoeff[1]+leastSquaresCoeff[0]*current_minx)))
+              .attr("x2", xScale(current_maxx))
+              .attr("y2", yScale((leastSquaresCoeff[1]+leastSquaresCoeff[0]*current_maxx)))
+              .style("stroke", "green")
+              .style("stroke-width", "5px");
+         
+          //////////////////////////////////////
+          // add label for the regression line
+          svg.append("svg:line")
+              .attr("class", "regression")
+              .attr("x1", width-550)
+              .attr("y1", 200)
+              .attr("x2", width-450)
+              .attr("y2", 200)
+              .style("stroke", "green")
+              .style("stroke-width", "5px");
+
+          svg.append("text")
+            .attr("class", "legend")
+            .attr("text-anchor", "end")
+            .attr("y", 200)
+            .attr("x", width-200)
+            .attr("font-size", "25")
+            .text("Linear regression line");
+
+      
+        };
+        
+        function update_axis(xaxis_name, yaxis_name){
+          current_x = xaxis_name;
+          current_y = yaxis_name;
+          // determine the opacity of the hand
+          // change the handness label
+          // change axis, the initial handedness is 2
+          d3.select("div.handedness")
+            .text("Handedness is: RL");
+          current_hand = 2;
+
+          // remove the old axis
+          // remove the old datapoints
+          var axiss = svg.selectAll("g.axis");
+          axiss.transition()
+              .duration(1000)
+              .remove();
+
+          var ken_func = function(d){
+            return d['key'];
+
+          };
+          
+          // debugger;   
+          var circles1 = svg.selectAll('circle')
+              .data(baseball_data, ken_func);
+          circles1.exit()
+              .remove();
+          
+          var circles2 = svg.selectAll('ellipse')
+              .data(baseball_data, ken_func);
+          circles2.exit()
+              .remove();
+
+
+          var maxX = d3.max(baseball_data, 
+            function(d){return parseFloat(d[xaxis_name]); });
+
+          var minX = d3.min(baseball_data, 
+            function(d){return parseFloat(d[xaxis_name]); }); 
+            
+          var maxY = d3.max(baseball_data, 
+            function(d){return parseFloat(d[yaxis_name]); });
+          var minY = d3.min(baseball_data, 
+            function(d){return parseFloat(d[yaxis_name]); });
+
+
+          var xScale = d3.scale.linear()
+              .domain([0.9*minX, 1.1*maxX])
+              .range([padding, width-padding]);
+
+          var yScale = d3.scale.linear()
+              .domain([0.9*minY, 1.1*maxY])
+              .range([height-padding, padding]);
+            
+          var xAxis = d3.svg.axis()
+              .scale(xScale)
+              .orient("bottom")
+              .ticks(7);
+
+          var yAxis = d3.svg.axis()
+              .scale(yScale)
+              .orient("left")
+              .ticks(7);
+            
+          // add new axises
+          svg.append("g")
+              .attr("class", "axis")
+              .attr("transform", "translate(0, "+(height-padding )+")")
+              .transition()
+              .duration(1000)
+              .call(xAxis);
+
+          svg.append("g")
+              .attr("class", "axis")
+              .attr("transform", "translate("+ padding +", 0)")
+              .transition()
+              .duration(1000)
+              .call(yAxis);
+              
+          var getXAxisValue2 = function(d){
+            
+            if (parseFloat(d[xaxis_name]) <= 0){
+              return xScale(0);
+            } else{
+              return xScale(parseFloat(d[xaxis_name]));
+            }
+          };
+                
+          var getYAxisValue2 = function(d){
+                        
+            if ( parseFloat(d[yaxis_name]) <= 0){
+              return yScale(0);
+            } else{
+              return yScale(parseFloat(d[yaxis_name]));
+            }
+          };
+
+          // when the yaxis is avg, different function
+          // the y axis value should be multiplied by 1000
+          var getYAxisValue22 = function(d){                        
+            if ( parseFloat(d[yaxis_name]) <= 0){
+              //console.log(yScale(1000.0*parseFloat(d[yaxis_name])));
+              return yScale(0);
+            } else{
+              return yScale(1000*parseFloat(d[yaxis_name]));
+            }
+          };
+       
+            svg.selectAll('circle')
+              .data(baseball_data)
+              .enter()
+              .append("circle")
+              .filter(function(d){
+                  return d["handedness"]=== "L"&& d[current_y] !=0;
+                })
+              .transition()
+              .duration(500)
+              .attr("cx", getXAxisValue2)
+              .attr("cy",  getYAxisValue2)
+              .attr("r", 5)
+              .attr("fill", "red")
+              .style("opacity", 1);
+
+            svg.selectAll('ellipse')
+              .data(baseball_data)
+              .enter()
+              .append("ellipse")
+              .filter(function(d){
+                  return d["handedness"]=== "R"&& d[current_y] !=0;
+                })
+              .transition()
+              .duration(500)
+              .attr("cx", getXAxisValue2)
+              .attr("cy", getYAxisValue2)
+              .attr("rx", 5)
+              .attr("ry", 5)
+              .attr("fill", "blue")
+              .style("opacity", 1);
+            
+
+          // add trending line
+          // fetch the data in x y series
+
+          // remove all the zeros data points
+          var baseball_data_no_zero = baseball_data.filter(
+            function(d){
+                  return d[yaxis_name] !=0;
+                }
+            );
+
+          if (current_y !="avg"){
+            baseball_data_no_zero = baseball_data.filter(
+            function(d){
+                  return true;
+                }
+            );
+          }
+
+          var ySeries = baseball_data_no_zero.map(function(d){
+            return parseFloat(d[yaxis_name]);
+          });
+
+          var xSeries = baseball_data_no_zero.map(function(d){
+            return parseFloat(d[xaxis_name]);
+          });
+
+          // console.log("xSeries");
+          // console.log(xSeries);
+          // console.log("ySeries");
+          // console.log(ySeries);
+
+          // regresssion analysis
+          //slope, intercept, r2
+          var leastSquaresCoeff = leastSquares(xSeries, ySeries);
+          console.log(leastSquaresCoeff);
+
+          // remove the old line
+          var oldline = svg.selectAll("line.regression");
+          oldline.transition()
+              .duration(100)
+              .remove();
+          svg.selectAll("text.legend")
+              .transition()
+              .duration(100)
+              .remove();
+
+          // slope, intercept and r-square of the line
+          // set the current min and max for handedness drawing
+          current_minx = minX;
+          current_maxx = maxX;
+          current_miny = minY;
+          current_maxy = maxY;
+
+          var myLine = svg.append("svg:line")
+              .attr("class", "regression")
+              .attr("x1", xScale(current_minx))
+              .attr("y1", yScale((leastSquaresCoeff[1]+leastSquaresCoeff[0]*current_minx)))
+              .attr("x2", xScale(current_maxx))
+              .attr("y2", yScale((leastSquaresCoeff[1]+leastSquaresCoeff[0]*current_maxx)))
+              .style("stroke", "green")
+              .style("stroke-width", "5px");
+         
+          /////////////////////////////
+          // add label for the regression line
+          svg.append("svg:line")
+              .attr("class", "regression")
+              .attr("x1", width-150)
+              .attr("y1", 100)
+              .attr("x2", width-100)
+              .attr("y2", 100)
+              .style("stroke", "green")
+              .style("stroke-width", "5px");
+
+          svg.append("text")
+            .attr("class", "legend")
+            .attr("text-anchor", "end")
+            .attr("y", 100)
+            .attr("x", width+50)
+            .attr("font-size", "15")
+            .text("Linear regression line");
+
+        };
+
+        //////////////////////////////////////
+        // add div for axiss butttons
+        var group_axiss = d3.select("body")
+              .append("div")
+              .attr("class", "group_axiss");
+
+
+        var yaxis_names = ["HR", "avg"];
+        var xaxis_names = ["weight", "height"];
+
+        var names = ["HR vs. weight", "HR vs. height", 
+                    "avg vs. weight", "avg vs. height",
+                    "HR vs. avg"];
+
+        var axiss_idx = 0;
+
+        var axiss_interval=setInterval(function(){
+            update_axis("weight", "HR");
+            
+            axiss_idx++;
+
+            if(axiss_idx>=names.length){
+                clearInterval(axiss_interval);
+
+                
+                // ADD BUTTONS
+                var buttons = group_axiss.selectAll("div")
+                      .data(names)
+                      .enter()
+                      .append("div")
+                      .text(function(d){ return d; })
+                      .style("background", function(d, i){ 
+                        if (i ===0){
+                          return "lightBlue";
+                        } else{
+                          return "rgb(251, 201, 127)"
+                        }
+                      });
+                
+                // ADD CLICK FUNCTION TO BUTTONS
+                buttons.on('click', function(d){
+                  d3.select(".group_axiss")
+                    .selectAll("div")
+                    .transition()
+                    .duration(500)
+                    .style('color', "black")
+                    .style("background", "rgb(251, 201, 127)");
+                  
+                  // change the style of the clicked button
+                  d3.select(this)
+                    .transition()
+                    .duration(500)
+                    .style('color', "white")
+                    .style("background", "lightBlue");
+          
+                  // get names of axis labels
+                  first =d.indexOf(" ");
+                  second = d.indexOf(" ", first+1);
+                  current_y = d.slice(0, first);
+                  current_x = d.slice(second+1, d.length);
+
+                  d3.select("text.xlabel")
+                      .transition()
+                      .duration(500)
+                      .text(current_x);
+                  d3.select("text.ylabel")
+                      .transition()
+                      .duration(500)
+                      .text(current_y)
+                  // update the axis
+                  update_axis(current_x, current_y);
+                });
+
+            }
+
+          }, 1000);
+
+          
+    
+        /////////////////////////////////////////////
+        // update_hand("L", "R");
+        
+        var button_handedness = d3.select("body")
+            .append("div")
+            .attr("class", "handedness")
+            .text("Handedness is: RL");
+          
+        
+        button_handedness.on("click", function(d){
+          var this_button = d3.select(this);
+          if(current_hand==0){
+            current_hand = current_hand+1;
+            update_hand("L", "R");
+            this_button.text("Handedness is: L");
+            
+          } else if (current_hand ==1){
+            current_hand = current_hand+1;
+            update_hand("L", "R");
+            this_button.text("Handedness is: RL");
+          } else if (current_hand ==2){
+            current_hand = 0;         
+            update_hand("R", "L");
+            this_button.text("Handedness is: R");
+          }
+          
+        });
+
+        ///////////////////////////////////////////
+        // add description text
+        d3.select("body")
+          .append("p")
+          .attr("class", "buttons")
+          .text("'HR' is Home Runs, 'avg' is Average Batting Score, 'weight' is in Pounds, 'height' is in inches.");
+
+        d3.select("body")
+          .append("p")
+          .attr("class", "buttons")
+          .text("Click the 'Handedness' to show the data points with only right handed, only left handed, or both.");
+
+        d3.select("body")
+          .append("p")
+          .attr("class", "descript")
+          .text("This data visualization shows how the  batting average and home run count of each baseball player are related with the handedness, height and weight. The physical features of each player are ploted on the X axis; the sports performance are ploted on the Y axis. AVG means batting average, HR means the home run counts. Data points with handedness = R is ploted in red; data points with handedness = L is ploted in blue. Linear regression line is drawn to show the correlation between different variables.");
+        
+        d3.select("body")
+          .append("p")
+          .attr("class", "finding")
+          .text("The visualization shows that the number of home runs are not quite related to the height, and a bit positively related to weight. Players of higher weight may have more home runs. Both the regression line between average battng score and weight,and between average batting score and height have negative slope. Higher and heavier players tends to have lower average batting score. The effect of height on average batting score is more obvious than weight. Home runs is not affected handedness of players. For plots of avg vs weight and avg vs height, clicking the handedness button shows that when handedness is right, the regression line appears to go down in the transition; when handedness is left, the regression line appears to be go up in the transition. So left-handed players tend to have slightly higher average batting score. The HR vs avg scatter plot shows that player of higher average batting score are more likely to have higher home runs. But it is apparent that very high average batting score is quite possible to have very low home runs. The correlation between average batting score and home runs are not strong.");
+        
+
+        d3.selectAll("axisElement")
+            .classed("large-font", true);
+        
+
+      };
+
+      
+      d3.csv("data/baseball_data.csv", plot_points_hand); 
+      
+      
+
+    };
+
+    // returns slope, intercept and r-square of the line
+    function leastSquares(xSeries, ySeries) {
+      var reduceSumFunc = function(prev, cur) { return prev + cur; };
+      
+      var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
+      var yBar = ySeries.reduce(reduceSumFunc) * 1.0 / ySeries.length;
+
+      var ssXX = xSeries.map(function(d) { return Math.pow(d - xBar, 2); })
+        .reduce(reduceSumFunc);
+      
+      var ssYY = ySeries.map(function(d) { return Math.pow(d - yBar, 2); })
+        .reduce(reduceSumFunc);
+        
+      var ssXY = xSeries.map(function(d, i) { return (d - xBar) * (ySeries[i] - yBar); })
+        .reduce(reduceSumFunc);
+        
+      var slope = ssXY / ssXX;
+      var intercept = yBar - (xBar * slope);
+      var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
+      
+      return [slope, intercept, rSquare];
+    }
+    
+    
+  </script>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js">
+</script>
+  <script type="text/javascript">
+    d3.csv("../data/baseball_data.csv", draw);
+  </script>
+
+</body>
+</html>

@@ -1,10 +1,10 @@
 # Site settings
-title: GUANGHUIZ
-email: ""
-description: "Know all about me from here."
-baseurl: ""
-url: "http://www.guanghuiz.com"
+title:  张光辉
+description:  "一个匠人。"
+baseurl: "/cn"
+url: "http://www.guanghuiz.com/cn"
 github_username:  kensupernova
+
 # Build settings
 markdown: kramdown
 permalink: pretty
@@ -12,3 +12,26 @@ permalink: pretty
 # time zone
 timezone: Asia/Singapore
 encoding: utf-8
+
+#nav config
+nav:
+  - text: 首页
+    url:  /
+  - text: 分类
+    url:  /categories/
+  - text: 归档
+    url:  /archives/
+  - text: 关于
+    url:  /about/
+  - text: Apps
+    url: /apps/  
+apps:
+  - text: oneverse
+    url: /apps/oneverse/
+  - text: idiomcracker
+    url: /apps/idiomcracker/  
+
+# comment config
+disqus:
+  config: true
+  id: guanghuiz

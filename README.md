@@ -1,3 +1,3 @@
-kensupernova.github.io
-======================
-visit by www.guanghuiz.com
+我的博客
+==============
+我的博客. visit by www.guanghuiz.com/cn

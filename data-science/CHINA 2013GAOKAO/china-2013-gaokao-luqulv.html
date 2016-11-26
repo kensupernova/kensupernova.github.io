@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    .title_map{
+      margin-left: 600px;
+    }
+
+    #tooltip{
+      position:absolute;
+      width:200px;
+      height:auto;
+      padding:10px;
+      pointer-events: none;
+      opacity: 1;
+    }
+
+    #tooltip.hidden{
+      display: none;
+    }
+
+    #tooltip p{
+      margin: 0;
+      font-family: sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  
+  </style>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+  <script type="text/javascript">
+
+    function draw(error, data){
+      
+
+      var margin = 50,
+          width = 1600 - margin,
+          height = 1000 - margin,
+          padding = 80;
+
+      d3.select("body")
+        .append("h2")
+        .attr("class", "title_map")
+        .text("中国2013年高考");
+
+      var chinaG = d3.select("body")
+        .append("svg")  
+        .attr("width", width+margin)
+        .attr("height", height+margin)
+        .append("g")
+        .attr("class", "map");
+
+      
+
+      //draw the map of the earth
+      var projection = d3.geo.mercator()
+            .center([107, 31])
+            .scale(800)
+            .translate([width/2, height/2]);
+      
+      var path = d3.geo.path()
+            .projection(projection);
+
+      var color = d3.scale.category20();
+
+      var map = chinaG.selectAll('path')
+          .data(data.features)
+          .enter()
+          .append('path')
+          .attr("id", function(d){
+            return d.id;
+          })
+          .style('fill', "#000000")
+          .style("stroke-width", '1px')
+          .style("stroke", "#f9f9ff")
+          .attr('d', path);
+    
+      
+    };
+
+    //根据录取率排序
+    function sortByRate(gkData){
+      // rate是xx格式
+      var data = gkData.datas.sort(function(d1, d2){
+        return parseFloat(d2.rate) - parseFloat(d1.rate);
+      })
+
+      // set color
+      var rateColors = d3.scale.linear()
+          .domain([1, 340])
+          .range([d3.rgb(20, 120, 140), 
+                  d3.rgb(180, 230, 255)])
+
+      /* 
+      遍历上一步得到是数组 
+      forEach 参数中的 d 就是遍历到的某个数据， i 就是该对象的下标序号，从0开始 
+      */ 
+      data.forEach(function(d, i){
+        d.sort = i + 1;
+        var element = d3.select("#"+d.id);
+        element.transition()
+          .duration(100)
+          .style("fill", rateColors((i+1)*10));
+      });
+
+      buildTip(data);
+    
+    };
+
+    //根据录取率排序
+    function sortByTotal(gkData){
+      // rate是xx格式
+      var data = gkData.datas.sort(function(d1, d2){
+        return parseFloat(d2.total) - parseFloat(d1.total);
+      })
+
+      // set color
+      var rateColors = d3.scale.linear()
+          .domain([1, 340])
+          .range([d3.rgb(20, 120, 140), 
+                  d3.rgb(180, 230, 255)])
+
+      /* 
+      遍历上一步得到是数组 
+      forEach 参数中的 d 就是遍历到的某个数据， i 就是该对象的下标序号，从0开始 
+      */ 
+      data.forEach(function(d, i){
+        d.sort = i +1;
+        d3.select("#"+d.id)
+          .transition()
+          .duration(duration)
+          .delay(10*i)
+          .style("fill", rateColors((i+1)*10));
+      });
+      buildTip(data);
+
+    };
+
+
+    function buildTip(data){
+      var t = "#tooltip";
+      d3.selectAll("path")
+          .data(data, function(d){
+            return d.id;
+          })
+          .on("mouseover", function(d){
+            // var xpos = parseFloat(d3.select(this).attr("x"));
+            // var ypos = parseFloat(d3.select(this).attr("y"));
+            var box =  d3.select(t)  
+                .style("left", d3.event.x + "px")  
+                .style("top", d3.event.y + "px")  
+                .classed("hidden", false);
+            box.select("#value")
+                .text(d.rate);
+            box.select("#shengfen")
+                .text(d.province); 
+
+            d3.select(this).style("opacity", 0.8);
+          })
+          .on("mouseout", function(){
+              d3.select(t).classed("hidden", true);
+              
+              d3.select(this)
+                .style("opacity", 1);
+          });
+    };
+
+  
+
+  </script>
+</head>
+<body>
+
+  <div id="tooltip", class="hidden">
+    <p><span id="shengfen">北京</span></p>
+    <p>录取率:<span id="value">100</span></p>
+  </div>  
+
+  <script type="text/javascript">
+    d3.json('data/china.json', draw);
+    d3.json("data/2013GKLQL.json", sortByRate);
+  </script>
+
+
+</body>
+</html>

@@ -1,15 +1,25 @@
 ---
-layout: home
-avatar: yes
+layout: page
+title: 首页
+permalink: /
 ---
-This is the entrance to my personal website in Chinese and English Version. 
-Great thanks to <a href="http://yihui.name">Yihui Xie</a> from who I learned this and made this mainpage. As bilingual speaker, it is the best to establish website in two languages so that I can reach to more audiences. 
-<br>
-Currently I work as reseach assocate in Nanyang Technological University. Since I am so obssessed with coding, I learned to write programs by myself. I have taken more than ten MOOC courses on CS from Coursera, Edx and Udacity. They covered python programing, web appliation development, android app development, and data analysis skills. 
-Click <a href="/cn">Chinese</a> or <a href="/en">English</a> to learn more.
-<br>
-这是我的中英个人网站的入口。感谢<a href="http://yihui.name">Yihui Xie</a>，从他那里，我学到了做这个首页。做为一个熟练掌握了两门语言的人，建立一个双语的网站可以有更多的访问。
-<br>
-目前我在新加坡南洋理工大学做研究助理。对于编程，我有浓厚的兴趣，我自学了多门语言。从Coursera, Edx, Udacity等课程网站我修了十多门CS课程，涵盖python，网站开发，安卓应用开发，以及数据分析技能等。
-点击<a href="/cn">Chinese</a>或<a href="/en">English</a>, 了解更多。 
 
+<div class="home">
+
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        <article class="post-content">
+          {% if post.content contains "<!--more-->" %}
+            {{ post.content | split:'<!--more-->' | first }} <a href="{{post.url| prepend: site.baseurl }}"> Continue...</a>
+          {% else %}
+            {{ post.content }}
+          {% endif %}
+        </article>
+      </li>
+    {% endfor %}
+  </ul>
+
+</div>
