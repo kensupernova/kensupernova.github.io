@@ -32,7 +32,7 @@
 
     div.group_axiss{
       position: fixed;
-      top: 150px;
+      top: 50px;
       left: 5px;
       font-size: 15px;
       font-family: sans-serif;
@@ -49,7 +49,7 @@
 
     div.handedness{
       position: fixed;
-      top: 550px;
+      top: 390px;
       left: 5px;
       width: 150px;  
       height: 50px;
@@ -618,16 +618,16 @@
           svg.append("svg:line")
               .attr("class", "regression")
               .attr("x1", width-150)
-              .attr("y1", 100)
+              .attr("y1", 200)
               .attr("x2", width-100)
-              .attr("y2", 100)
+              .attr("y2", 200)
               .style("stroke", "green")
               .style("stroke-width", "5px");
 
           svg.append("text")
             .attr("class", "legend")
             .attr("text-anchor", "end")
-            .attr("y", 100)
+            .attr("y", 200)
             .attr("x", width+50)
             .attr("font-size", "15")
             .text("Linear regression line");
