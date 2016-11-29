@@ -393,9 +393,9 @@
           // add label for the regression line
           svg.append("svg:line")
               .attr("class", "regression")
-              .attr("x1", width-550)
+              .attr("x1", width-150)
               .attr("y1", 200)
-              .attr("x2", width-450)
+              .attr("x2", width-100)
               .attr("y2", 200)
               .style("stroke", "green")
               .style("stroke-width", "5px");
@@ -404,8 +404,8 @@
             .attr("class", "legend")
             .attr("text-anchor", "end")
             .attr("y", 200)
-            .attr("x", width-200)
-            .attr("font-size", "25")
+            .attr("x", width+50)
+            .attr("font-size", "15")
             .text("Linear regression line");
 
       
