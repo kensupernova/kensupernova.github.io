@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "我发布了一款接受bible verse的app"
-date:   2014-07-06 14:58:25
-categories: jekyll
-tags: jekyll
+title: "我发布了一款接受bible verse的app"
+date: 2014-07-06 14:58:25
+categories: Android
+tags: Android
 ---
 我发布了一款接受bible verse的app。从零开始经过好两周晚上的摸索，今天我终于开发成功并在google play发布了我的
 android app.<!--more-->对于一个非cs非ee专业的业余coder，编写android的困难着实不小。期间经过好几次几乎

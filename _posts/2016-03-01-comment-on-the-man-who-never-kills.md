@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "我看杀手欧阳盆栽"
-date:   2016-03-01 12:00:00
+title: "我看杀手欧阳盆栽"
+date: 2016-03-01 12:00:00
 categories: 文艺
+tags: 中文
 ---
 <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
 

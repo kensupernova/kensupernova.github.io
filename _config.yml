@@ -13,7 +13,7 @@ permalink: pretty
 timezone: Asia/Singapore
 encoding: utf-8
 
-#nav config
+# nav config
 nav:
   - text: 首页
     url:  /
