@@ -6,22 +6,19 @@
       <a href="#" class="menu-icon"></a>
       <ul class="site-nav">
             {% for link in site.nav %}
-            {% assign active = nil %}
-            {% if page.url == link.url%}
-              {% assign active = 'nav-item-active' %}
-            {% endif %}
-            <li class="nav-item {{ active }}">
+              {% assign active = nil %}
+              {% if page.url == link.url%}
+                {% assign active = 'nav-item-active' %}
+              {% endif %}
+              <li class="nav-item {{ active }}">
                 <a href="{{ site.baseurl }}{{ link.url }}">
                     {{ link.text }}
                 </a>
                 {{ indicator }}
-            </li>
+              </li>
             {% endfor %}
             
             <li class="nav-item"><a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS</a></li>
-            <!-- <li class="nav-item"><a href="http://www.guanghuiz.com/en">EN</a></a></li> -->
-            
-      
         
       </ul>
       </div>  
