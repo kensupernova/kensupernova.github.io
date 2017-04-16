@@ -25,6 +25,8 @@ nav:
     url: /apps/  
   - text: 关于
     url:  /about/
+  - text: EN
+    url:  /en/
 apps:
   - text: oneverse
     url: /apps/oneverse/
