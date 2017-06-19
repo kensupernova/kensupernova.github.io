@@ -111,18 +111,22 @@ a:visited { color: #205caa; }
 }
 .footer-col-2 {
   width: 175px; /*fallback*/
-  width: -webkit-calc(23.125% - 10px);
-  width: -moz-calc(23.125% - 10px);
-  width: -o-calc(23.125% - 10px);
-  width: calc(23.125% - 10px);
-  margin-right: 10px
+  width: -webkit-calc(50% - 10px);
+  width: -moz-calc(50% - 10px);
+  width: -o-calc(50% - 10px);
+  width: calc(50% - 10px);
+  margin-right: 10px；
+  box-sizing: border-box;
+  text-align: center;
 }
 .footer-col-3 {
   width: 335px; /*fallback*/
-  width: -webkit-calc(41.875%);
-  width: -moz-calc(41.875%);
-  width: -o-calc(41.875%);
-  width: calc(41.875%);
+  width: -webkit-calc(50%);
+  width: -moz-calc(50%);
+  width: -o-calc(50%);
+  width: calc(50%);
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .site-footer ul { list-style: none; }
